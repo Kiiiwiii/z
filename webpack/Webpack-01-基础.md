@@ -6,10 +6,6 @@
 
   > **Browser 端的 Require.js ？**
 
-![webpack01](/Users/Zhan_/Documents/Coding/Web/Javascript/JS_Learning/Javascript/Webpack/images/webpack01.png)
-
-
-
 
 
 ## 1. Webpack 基础
