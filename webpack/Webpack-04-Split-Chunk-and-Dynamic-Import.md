@@ -73,7 +73,7 @@ graph TD
       ).then(() => {
         console.log('user');
       }).catch(error => {
-        console.log(error)
+        console.log(error);
       });
     
     ```
@@ -234,7 +234,7 @@ graph TD
 
 ### 关于 split-chunk-plugin 的额外信息
 
-#### *4. 依赖可能同时属于多个 已经被splitted 的 chunks, 靠 priority 区分
+#### 4. 依赖可能同时属于多个 已经被splitted 的 chunks, 靠 priority 区分
 
 **注意！ 这里配置的主体们是已经被 split 的 common chunk**
 
@@ -279,7 +279,7 @@ graph TD
 
 
 
-####*5. minimal optimization: 分割出只跟某个entry chunk有关的 vendors, 打包进一个chunk 
+####5. minimal optimization: 分割出只跟某个entry chunk有关的 vendors, 打包进一个chunk 
 
 > 待考究，并不是很推荐
 
@@ -329,7 +329,8 @@ graph TD
   * `webpack.config.js`
 
     ```js
-    /[\\/]shared-module-2[\\/]/,new HtmlWebpackPlugin({
+    /[\\/]shared-module-2[\\/]/,
+        new HtmlWebpackPlugin({
           template: __dirname + "/app/index.tmpl.html",
           chunks: ['main', 'user', 'vendors'],
         }),
@@ -432,7 +433,6 @@ graph TD
   }),
   ```
 
-  
 
 
 
@@ -538,7 +538,6 @@ graph TD
 
 * image / 文件的 长缓存
 
-  ...
+  url loader 节约一个 http 请求 + file loader 实现 image hash化
 
-  
 

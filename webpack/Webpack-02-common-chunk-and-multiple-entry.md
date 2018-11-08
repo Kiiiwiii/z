@@ -55,7 +55,7 @@
 
 
 
-#### 2. Resolve
+#### 2. Resolve - 简化 es6 import 的依赖寻路
 
 1. 默认依赖模块的后缀名
 
@@ -87,7 +87,7 @@
   import * from './greeter'
   ```
 
-> Webpack 4+ 已经自动支持这个功能了
+> Webpack 4+ 已经**自动**支持这个功能了
 
 
 
@@ -169,7 +169,12 @@
   module.exports = {
     entry: {
       main: './main.js',
-      other: './user.js'
+      other: './user.js'，
+      // 全局 css style
+      style: [
+        '..../primeng.css',
+        '..../primeng-custom.css'
+      ]
     },
     output: {
       path: __dirname + '/build', 
@@ -305,8 +310,6 @@
     > 两个bundle 中都包含全部 shared.js 代码，相当于引入了两次
 
   * 我们期待的行为应该是，作为共享依赖，应该只在**第一次引入的时候被加载**， 后面如果有相同模块加载，浏览器不应该再发送请求，而是寻找cache中的该模块。
-
-  
 
 * 解决办法： 将 shared 模块单独包装成 一个 chunk(bundle), 保证只在第一次被引入的时候加载，之后再被引入的时候，浏览器直接从cache中找这个 chunk。
 
@@ -500,7 +503,6 @@
   };
   ```
 
-  
 
  
 
@@ -519,9 +521,11 @@
 
   * 将所有的 `.css` 单独打包成一个 chunk, 再通过 `<link>` 外部链接的方式，引入 `index.html` 中
 
-* 实践
+* 实践 - MiniCssExtractPlugin
 
   > 相关插件 `ExtractTextPlugin` 已经不再适合  webpack 4.0+ 了，使用`mini-css-extract-plugin`
+
+  > This plugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.
 
   * `webpack.config.js`
 
@@ -626,11 +630,12 @@
 
       * **注意**： `import x from '...'` 表示import default
 
+      > 这种关联的方式其实就是框架的方式？
 
-    > 这种关联的方式其实就是框架的方式？
-    
-    * `.css`
-    
+
+
+      * .css`
+
       ```css
       body {
           background-image: url('../assets/images/home.png');
@@ -685,7 +690,6 @@
   }
   ```
 
-  
 
 ## 7.  ProvidePlugin - Expose
 
@@ -733,8 +737,6 @@
             ]
           ....
           ```
-
-          
 
 * 使用 - `main.js`
 
@@ -791,5 +793,3 @@
     console.log($);
     console.log(data);
     ```
-
-    
