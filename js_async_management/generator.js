@@ -10,7 +10,7 @@ function loadImage(src, callback) {
 function thunk(originFn) {
   return function (...args) {
     return function (callback) {
-      originFn.call(this, args, callback);
+      originFn.call(this, ...args, callback);
     }
   }
 }
